@@ -1,7 +1,7 @@
 ﻿# Virtual-dictionary-_React_Typescript
 
 
-#Install Project
+# Install Project
 
 - git clone
 - go to the folder
@@ -9,7 +9,7 @@
 - npm run dev to to launch the project on localhost 5173
 
 
-#Features
+# Features
 
 - Dark Mode (use of localstorage to keep data saved )
 - Font change with a select (use of localstorage to keep data saved)
