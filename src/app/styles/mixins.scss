@@ -1,0 +1,288 @@
+@use "./variables.scss" as var;
+
+@mixin bgDark($light, $dark) {
+    background-color: $dark;
+    color: $light;
+}
+
+@mixin bgLight($light, $dark) {
+    background-color: $light;
+    color: $dark;
+}
+
+@mixin flexStyle ($flex, $direction, $justify, $align, $gap) {
+    display: $flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}
+
+@mixin gradientColorStyle {
+    background-image: -webkit-linear-gradient(95deg, var.$gradient_color);
+    font-weight: bold;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin headerStyle {
+    .header {
+        @include flexStyle(flex, column, flex-start, center, 2rem);
+        padding-top: 3.5rem;
+        padding-bottom: calc(3.5rem / 2);
+
+        &_bloc {
+            @include flexStyle(flex, row, space-around, center, .625rem);
+            width: 100%;
+        }
+
+        div:nth-child(1) {
+            flex: .95;
+
+            img {
+                height: 50px;
+                width: 50px;
+            }
+        }
+
+        &_darkMode {
+            @include flexStyle(flex, row, flex-start, flex-start, .5rem);
+            border-left: 1px dashed var.$border_color;
+            padding: .625rem;
+
+            button {
+                background-image: linear-gradient(to right bottom, var.$gradient_color);
+                padding: .5rem;
+                border: none;
+                border-radius: .25rem;
+            }
+        }
+
+        @include SearchBoxStyle;
+    }
+}
+
+@mixin darkModeStyle {
+    .dark {
+        @include bgDark(var.$light_color, var.$dark_color);
+
+        select,
+        a {
+            @include bgDark(var.$light_color, var.$dark_color);
+        }
+
+        img {
+            filter: brightness(0) invert(1);
+        }
+
+        .header {
+            &_darkMode {
+                button {
+                    color: var.$light_color;
+                }
+            }
+            &_searchBox {
+                &_inputBloc {
+                    background-color: var.$dark_color_input;
+
+                    input[type="search"] {
+                        color: var.$light_color;
+                    }
+
+                    button[type="submit"] {
+                        background-color: var.$dark_color_input;
+                        border-left: 1px dashed var.$light_color
+                    }
+                }
+            }
+        }
+
+        .main {
+            &_meaning {
+                @include bgDark(var.$light_color, var.$dark_color);
+            }
+        }
+    }
+
+    .light {
+        @include bgLight(var.$light_color, var.$dark_color);
+    }
+}
+
+@mixin fontFamilyStyle {
+    select {
+        border: none;
+        outline: none;
+        padding-block: .5rem;
+    }
+
+    .arial {
+        font-family: arial;
+    }
+
+    .serif {
+        font-family: serif;
+    }
+
+    .sans_serif {
+        font-family: sans-serif;
+    }
+
+    .cursive {
+        font-family: cursive;
+    }
+
+    .mono {
+        font-family: monospace;
+    }
+
+    .times {
+        font-family: 'Times New Roman', Times, serif;
+    }
+}
+
+@mixin SearchBoxStyle {
+    &_searchBox {
+        width: 100%;
+
+        &_inputBloc {
+            @include flexStyle(flex, row, flex-start, flex-start, 1rem);
+            border: none;
+            background-color: var.$border_color;
+            border-radius: .5rem;
+            padding-inline: 1rem;
+            padding-block: 1rem;
+
+            input[type="search"] {
+                border: none;
+                outline: none;
+                background: none;
+                width: 100%;
+                font-size: 1.25rem;
+
+                @media(width <=var.$breakpoint_tablet) {
+                    font-size: 1rem;
+                }
+            }
+
+            button[type="submit"] {
+                border: none;
+                background: none;
+                float: right;
+                padding-inline: 1rem;
+
+                img {
+                    height: 25px;
+                    width: 25px;
+
+                    @media(width <=var.$breakpoint_tablet) {
+                        height: 20px;
+                        width: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin meaningStyle {
+    &_meaning {
+        @include flexStyle(flex, column, center, center, 0rem);
+        flex-wrap: wrap;
+        word-break: break-word;
+        width: 95%;
+        padding-inline: 1rem;
+        padding-block-end: 1rem;
+
+        &_bloc {
+            &_children {
+                @include flexStyle(flex, row, space-between, center, 0rem);
+                margin-bottom: 2rem;
+
+                div:nth-child(1) {
+                    p {
+                        font-size: 1.8vw;
+                        @include gradientColorStyle;
+
+                        @media(width <=var.$breakpoint_tablet) {
+                            font-size: 1.25rem;
+                        }
+                    }
+                }
+
+                div:nth-child(2) {
+                    button[type="button"] {
+                        border-radius: 50%;
+                        aspect-ratio: 1/1;
+                        height: 75px;
+                        width: 75px;
+                        border: none;
+                        background-image: linear-gradient(to right bottom, var.$gradient_color);
+                        opacity: .65;
+                    }
+                }
+            }
+
+            &_childrenBis {
+                @include flexStyle(flex, column, flex-start, flex-start, 2rem);
+
+                &_grandChild {
+                    @include flexStyle(flex, column, flex-start, flex-start, 1.5rem);
+
+                    ul {
+                        list-style-type: none;
+
+                        li {
+                            line-height: 1.25rem;
+                            @include flexStyle(flex, row, flex-start, flex-start, 0rem);
+                        }
+
+                        li:nth-child(1)::before {
+                            content: "•";
+                            padding-right: 8px;
+                            @include gradientColorStyle;
+                        }
+
+                        li:nth-child(2) {
+                            list-style-type: none;
+                            color: var.$example_color;
+                            margin-inline: .85rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .main_flex {
+        @include flexStyle(flex, column, flex-start, flex-start, .5rem);
+
+        h3 {
+            color: var.$example_color;
+        }
+        p {
+            @include gradientColorStyle;
+        }
+        img {
+            height: 12px;
+            width: 12px;
+        }
+    }
+
+    .main_flex:nth-child(3) {
+        padding-block-start: 1.5rem;
+    }
+}
+
+@mixin mainStyle {
+    .main {
+        @include meaningStyle;
+
+        img {
+            height: 32px;
+            width: 32px;
+        }
+    }
+}

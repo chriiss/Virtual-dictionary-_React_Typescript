@@ -1,0 +1,8 @@
+{
+    "darkModeComponent": {
+        "text": {
+            "light": "Light mode",
+            "dark": "Dark mode"
+        }
+    }
+}

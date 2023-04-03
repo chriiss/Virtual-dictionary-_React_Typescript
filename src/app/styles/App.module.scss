@@ -1,0 +1,35 @@
+@use "./mixins.scss" as mixins;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html body {
+    transition: all 0.56s ease-in-out;
+    max-width: 737px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: calc(3.5rem/ 1.5);
+}
+
+a {
+    text-decoration: none;
+    color: #212121;
+}
+
+select, button, a {
+    cursor: pointer;
+}
+
+@include mixins.headerStyle;
+@include mixins.darkModeStyle;
+@include mixins.fontFamilyStyle;
+@include mixins.mainStyle;
